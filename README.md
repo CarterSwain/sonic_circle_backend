@@ -1,13 +1,16 @@
-# Spotify Circle API
-
-A FastAPI backend that allows users to connect their Spotify accounts and compare their music preferences with others.
+🎧 Sonic Circle — Backend API
+Sonic Circle is a FastAPI-powered backend that connects Spotify users, visualizes musical overlap, and helps discover friends with similar tastes.
 
 ## Features
 
-- Spotify OAuth authentication
-- Get user's top tracks and artists
-- Connect with other users
-- Compare music preferences with connected users
+- Spotify OAuth 2.0 login with Spotipy
+- Store & manage Spotify users and their access tokens securely
+- Retrieve top tracks and artists
+- Mutual “Link” system like a friendship model
+- Compare music taste between any two linked users (including profile images, top track, and artist artwork)
+- Search users by Spotify ID or email
+- Suggest connections with strangers based on shared music preferences
+- Full profile endpoint for displaying top artist, top track, and Spotify profile info
 
 ## Setup
 
@@ -38,9 +41,14 @@ uvicorn main:app --reload
 - `GET /login`: Redirects to Spotify login
 - `GET /callback`: Handles Spotify OAuth callback
 - `GET /top-tracks?user_id={id}`: Get user's top tracks
-- `GET /top-artists?user_id={id}`: Get user's top artists
+- `GET /top-artists?user_id={id}`: Fetches user's top artists with genres, popularity, and images.
+- `GET /profile/{user_id}`: Returns a user's profile info including top track, top artist, and Spotify profile image.
+- `GET /users/search?q={query}`: Search users by Spotify ID or email.
+- `GET /suggested-links/{user_id}`: Suggests users with shared top artists for potential connection.
 - `POST /connect/{user_id}/{connected_user_id}`: Connect two users
-- `GET /compare/{user_id}/{connected_user_id}`: Compare two users' music preferences
+- `GET /linked-users/{user_id}`: Retrieves users that the current user is connected with.
+- `GET /compare/{user_id}/{connected_user_id}`: Compares top tracks and artists between two users. 
+
 
 ## Database Schema
 
